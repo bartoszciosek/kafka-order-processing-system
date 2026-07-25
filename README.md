@@ -8,16 +8,26 @@ A distributed, event-driven microservices architecture built with **Java**, **Sp
 
 The system processes incoming orders asynchronously by decoupling the request ingestion from downstream business logic (notifications, analytics, inventory, etc.).
 
-```markdown
-```mermaid
-graph TD
-    A[Client / Postman] -->|HTTP POST /api/orders| B(Order Service <br> Spring Boot REST)
-    B -->|Publish OrderEvent| C{Apache Kafka <br> Topic: orders-topic}
-    C -->|Consume OrderEvent| D(Notification Service <br> Kafka Consumer)
-
-    style C fill:#f9f,stroke:#333,stroke-width:2px
-    style B fill:#bbf,stroke:#333,stroke-width:1px
-    style D fill:#bbf,stroke:#333,stroke-width:1px
+```text
+[ Client / Postman ] 
+        │
+        ▼ (HTTP POST /api/orders)
+┌───────────────────────┐
+│     Order Service     │
+│   (Spring Boot REST)  │
+└───────────┬───────────┘
+            │
+            ▼ (Publish OrderEvent)
+┌───────────────────────┐
+│     Apache Kafka      │  ◄── Topic: "orders-topic"
+└───────────┬───────────┘
+            │
+            ▼ (Consume OrderEvent)
+┌───────────────────────┐
+│ Notification Service  │
+│    (Kafka Consumer)   │
+└───────────────────────┘
+```
 
 ##  Tech Stack
 
