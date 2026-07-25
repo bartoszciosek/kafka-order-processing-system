@@ -26,7 +26,7 @@ The system processes incoming orders asynchronously by decoupling the request in
 ┌───────────────────────┐
 │ Notification Service  │
 │    (Kafka Consumer)   │
-└───────────────────────┘
+└───────────────────────┘```
 
 ##  Tech Stack
 
